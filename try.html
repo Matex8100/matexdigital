@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Bulb Clip Image Design</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .image-container {
+      position: relative;
+      width: 300px;
+      height: 400px;
+    }
+
+    .bulb-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .clip-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      clip-path: url(#bulbClip);
+      transition: all 0.5s ease;
+    }
+
+    .clip-image.one {
+      z-index: 3;
+    }
+
+    .clip-image.two {
+      transform: translate(15px, 15px) scale(0.95);
+      opacity: 0.8;
+      z-index: 2;
+      filter: brightness(0.9);
+    }
+
+    .clip-image.three {
+      transform: translate(30px, 30px) scale(0.9);
+      opacity: 0.5;
+      z-index: 1;
+      filter: blur(2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SVG Clip Path Definition -->
+  <svg width="0" height="0">
+    <defs>
+      <clipPath id="bulbClip" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0 C0.7,0,1,0.2,1,0.5 C1,0.75,0.75,0.9,0.65,1 H0.35 C0.25,0.9,0,0.75,0,0.5 C0,0.2,0.3,0,0.5,0 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="image-container">
+    <!-- Background Bulb SVG Shape -->
+    <svg class="bulb-background" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid meet">
+      <path d="M100,0 C140,0,200,60,200,150 C200,220,150,270,130,300 H70 C50,270,0,220,0,150 C0,60,60,0,100,0 Z"
+            fill="#f4f4f4"/>
+    </svg>
+
+    <!-- Layered Clipped Images -->
+    <img src="images/data-analyst.png" alt="Bulb Clipped Image 1" class="clip-image one">
+    <img src="images/Hero-background.png" alt="Bulb Clipped Image 2" class="clip-image two">
+    <img src="images/data-analyst.png" alt="Bulb Clipped Image 3" class="clip-image three">
+  </div>
+
+</body>
+</html>
