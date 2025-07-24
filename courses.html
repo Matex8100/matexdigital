@@ -15,24 +15,36 @@
     }
 
     .hero-section {
-      background: linear-gradient(to right, #2196F3, #1565C0);
-      color: white;
-      padding: 100px 20px;
-      border-bottom-left-radius: 40px;
-      border-bottom-right-radius: 40px;
       position: relative;
+      height: 350px;
       overflow: hidden;
     }
 
-    .hero-section::after {
-      content: "";
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-title {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      top: -80px;
-      right: -80px;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 10;
+    }
+
+    .course-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .course-description {
+      font-size: 1.2rem;
+      color: #555;
     }
 
     .course-img {
@@ -40,6 +52,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       transition: transform 0.4s;
+      margin-top: 30px;
     }
 
     .course-img:hover {
@@ -80,14 +93,11 @@
 <body>
 
   <!-- Hero Section -->
-  <section class="hero-section text-center">
-    <div class="container">
-      <h1 id="courseTitle" class="fw-bold display-5">Loading...</h1>
-      <p id="courseTagline" class="lead">Loading course details...</p>
-      <div class="scroll-indicator">
-        <i class="bi bi-mouse2 fs-3"></i><br>
-        <i class="bi bi-chevron-down"></i>
-      </div>
+  <section class="hero-section">
+    <img id="courseHeroImage" src="" alt="Hero Image" class="hero-image" />
+    <div class="hero-title">
+      <h1 id="courseTitle" class="course-title">Loading...</h1>
+      <p id="courseTagline" class="course-description">Loading course details...</p>
     </div>
   </section>
 
@@ -97,13 +107,6 @@
       <div class="row g-5 align-items-start">
         <div class="col-md-6">
           <img id="courseImage" src="" alt="Course Image" class="course-img mb-4" />
-          <img id="courseHeroImage" src="" alt="Hero Image" class="course-img" />
-          <div class="mt-4">
-            <h5>⏱ Duration:</h5>
-            <p id="courseDuration" class="text-muted"></p>
-            <h5>💰 Price:</h5>
-            <p id="coursePrice" class="text-muted fw-bold"></p>
-          </div>
         </div>
 
         <div class="col-md-6">
@@ -129,51 +132,182 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const courseData = {
-      web: {
-        title: "Web Development",
-        tagline: "Build beautiful, responsive websites and web apps.",
-        image: "https://via.placeholder.com/600x350?text=Web+Course",
-        heroImage: "https://via.placeholder.com/600x150?text=Hero+Banner",
-        duration: "3 Months",
-        price: "₦60,000",
-        description: [
-          "Learn HTML, CSS, and JavaScript from scratch.",
-          "Build dynamic websites and responsive layouts.",
-          "Master front-end frameworks and version control."
-        ],
-        outline: [
-          { title: "Introduction to Web", content: "What is the web, how browsers and servers work, domain & hosting." },
-          { title: "HTML & CSS", content: "Structure web pages with HTML and style them beautifully using CSS." },
-          { title: "JavaScript Basics", content: "Programming with JS, DOM manipulation, and event handling." },
-          { title: "Projects & Deployment", content: "Build real-world projects and deploy them online." }
-        ],
-        link: "https://matexdigital.com/enroll/web"
-      },
-      graphics: {
-        title: "Graphics Design",
-        tagline: "Create stunning visuals for print and digital media.",
-        image: "https://via.placeholder.com/600x350?text=Graphics+Course",
-        heroImage: "https://via.placeholder.com/600x150?text=Hero+Banner",
-        duration: "2 Months",
-        price: "₦50,000",
-        description: [
-          "Use Photoshop, Illustrator, and CorelDRAW.",
-          "Understand visual hierarchy and design principles.",
-          "Design for social media, print, and branding."
-        ],
-        outline: [
-          { title: "Design Theory", content: "Principles of design, color theory, and typography." },
-          { title: "CorelDRAW & Illustrator", content: "Vector design, logos, business cards, and layouts." },
-          { title: "Photoshop Projects", content: "Photo manipulation, mockups, flyers, and branding assets." }
-        ],
-        link: "https://matexdigital.com/enroll/graphics"
-      }
-      // Add more courses here as needed
-    };
+const courseData = {
+  graphics: {
+    title: "Graphics Design",
+    tagline: "Create stunning visuals for print and digital media.",
+    image: "images/data-analyst.png",
+    heroImage: "images/data-analyst.png",
+    description: [
+      "Use Photoshop, Illustrator, and CorelDRAW.",
+      "Understand visual hierarchy and design principles.",
+      "Design for social media, print, and branding."
+    ],
+    outline: [
+      { title: "Design Theory", content: "Principles of design, color theory, and typography." },
+      { title: "CorelDRAW & Illustrator", content: "Vector design, logos, business cards, and layouts." },
+      { title: "Photoshop Projects", content: "Photo manipulation, mockups, flyers, and branding assets." }
+    ],
+    link: "https://matexdigital.com/enroll/graphics"
+  },
+  python: {
+    title: "Python Programming",
+    tagline: "Learn Python from scratch and build powerful applications.",
+    image: "https://via.placeholder.com/600x350?text=Python+Programming",
+    heroImage: "https://via.placeholder.com/1200x400?text=Python+Programming+Hero",
+    description: [
+      "Understand Python syntax and semantics.",
+      "Build web apps and automation scripts.",
+      "Explore data analysis and machine learning."
+    ],
+    outline: [
+      { title: "Introduction to Python", content: "Variables, data types, functions, and control flow." },
+      { title: "Object-Oriented Programming", content: "Classes, inheritance, and polymorphism." },
+      { title: "Web Development with Flask", content: "Building dynamic websites and web apps." }
+    ],
+    link: "https://matexdigital.com/enroll/python"
+  },
+  videoEditing: {
+    title: "Video Editing",
+    tagline: "Master the art of editing videos with modern tools and techniques.",
+    image: "https://via.placeholder.com/600x350?text=Video+Editing",
+    heroImage: "https://via.placeholder.com/1200x400?text=Video+Editing+Hero",
+    description: [
+      "Learn editing with Premiere Pro, Final Cut Pro, and DaVinci Resolve.",
+      "Edit for YouTube, Social Media, and Film production.",
+      "Understand color grading, sound design, and effects."
+    ],
+    outline: [
+      { title: "Introduction to Video Editing", content: "Learn the basics of cutting and stitching clips." },
+      { title: "Effects & Transitions", content: "Master effects, transitions, and compositing." },
+      { title: "Sound Design & Color Grading", content: "Improve audio and color for cinematic videos." }
+    ],
+    link: "https://matexdigital.com/enroll/videoediting"
+  },
+  digitalMarketing: {
+    title: "Digital Marketing",
+    tagline: "Learn how to market businesses effectively online with SEO, PPC, and Social Media.",
+    image: "https://via.placeholder.com/600x350?text=Digital+Marketing",
+    heroImage: "https://via.placeholder.com/1200x400?text=Digital+Marketing+Hero",
+    description: [
+      "Understand SEO, SEM, and PPC strategies.",
+      "Build and execute successful social media campaigns.",
+      "Track and measure digital marketing performance."
+    ],
+    outline: [
+      { title: "Introduction to Digital Marketing", content: "Basics of online marketing and strategies." },
+      { title: "SEO & SEM", content: "Learn search engine optimization and marketing techniques." },
+      { title: "Social Media Advertising", content: "Promote on Facebook, Instagram, and Google Ads." }
+    ],
+    link: "https://matexdigital.com/enroll/digitalmarketing"
+  },
+  webdev: {
+    title: "Web Development",
+    tagline: "Master modern web technologies and create responsive websites.",
+    image: "https://via.placeholder.com/600x350?text=Web+Development",
+    heroImage: "https://via.placeholder.com/1200x400?text=Web+Development+Hero",
+    description: [
+      "Learn HTML, CSS, and JavaScript.",
+      "Build responsive websites and apps.",
+      "Understand backend development with Node.js."
+    ],
+    outline: [
+      { title: "Frontend Basics", content: "HTML, CSS, JavaScript basics, and DOM manipulation." },
+      { title: "Responsive Web Design", content: "Mobile-first design and CSS Flexbox." },
+      { title: "Backend with Node.js", content: "Building APIs and integrating databases." }
+    ],
+    link: "https://matexdigital.com/enroll/webdev"
+  },
+  dataScience: {
+    title: "Data Science",
+    tagline: "Unlock the power of data with Python and R for data analysis and machine learning.",
+    image: "https://via.placeholder.com/600x350?text=Data+Science",
+    heroImage: "https://via.placeholder.com/1200x400?text=Data+Science+Hero",
+    description: [
+      "Learn data analysis with Python, R, and SQL.",
+      "Understand data visualization and statistics.",
+      "Build machine learning models."
+    ],
+    outline: [
+      { title: "Data Wrangling", content: "Clean and prepare data for analysis." },
+      { title: "Data Visualization", content: "Visualize data with tools like Tableau and Matplotlib." },
+      { title: "Machine Learning", content: "Build predictive models using scikit-learn." }
+    ],
+    link: "https://matexdigital.com/enroll/datascience"
+  },
+  ai: {
+    title: "Artificial Intelligence",
+    tagline: "Learn AI concepts and algorithms to build smart applications.",
+    image: "https://via.placeholder.com/600x350?text=AI+Programming",
+    heroImage: "https://via.placeholder.com/1200x400?text=AI+Hero",
+    description: [
+      "Understand machine learning and deep learning algorithms.",
+      "Build AI models using TensorFlow and PyTorch.",
+      "Deploy AI models into real-world applications."
+    ],
+    outline: [
+      { title: "Introduction to AI", content: "Learn the fundamentals of AI and machine learning." },
+      { title: "Deep Learning", content: "Master neural networks and deep learning architectures." },
+      { title: "AI Deployment", content: "Deploy AI models in production environments." }
+    ],
+    link: "https://matexdigital.com/enroll/ai"
+  },
+  iosDev: {
+    title: "iOS Development",
+    tagline: "Become an expert in developing apps for Apple's iOS platform.",
+    image: "https://via.placeholder.com/600x350?text=iOS+Development",
+    heroImage: "https://via.placeholder.com/1200x400?text=iOS+Development+Hero",
+    description: [
+      "Learn Swift programming for iOS app development.",
+      "Build apps with Xcode and iOS SDK.",
+      "Deploy apps to the App Store."
+    ],
+    outline: [
+      { title: "Introduction to Swift", content: "Learn the basics of Swift programming language." },
+      { title: "Building iOS Apps", content: "Master the iOS SDK to build beautiful apps." },
+      { title: "App Deployment", content: "Deploy your apps to the App Store and maintain them." }
+    ],
+    link: "https://matexdigital.com/enroll/iosdev"
+  },
+  androidDev: {
+    title: "Android Development",
+    tagline: "Develop and deploy powerful apps for Android devices.",
+    image: "https://via.placeholder.com/600x350?text=Android+Development",
+    heroImage: "https://via.placeholder.com/1200x400?text=Android+Development+Hero",
+    description: [
+      "Learn Java and Kotlin for Android app development.",
+      "Build apps with Android Studio.",
+      "Publish apps to Google Play Store."
+    ],
+    outline: [
+      { title: "Introduction to Java & Kotlin", content: "Learn Java and Kotlin programming for Android." },
+      { title: "Building Android Apps", content: "Master Android Studio to build native apps." },
+      { title: "App Publishing", content: "Deploy your apps to Google Play and earn revenue." }
+    ],
+    link: "https://matexdigital.com/enroll/androiddev"
+  },
+  uiuxDesign: {
+    title: "UI/UX Design",
+    tagline: "Learn the principles of user interface and experience design.",
+    image: "https://via.placeholder.com/600x350?text=UI/UX+Design",
+    heroImage: "https://via.placeholder.com/1200x400?text=UI/UX+Design+Hero",
+    description: [
+      "Understand wireframing, prototyping, and user testing.",
+      "Master tools like Figma, Adobe XD, and Sketch.",
+      "Design beautiful and intuitive user interfaces."
+    ],
+    outline: [
+      { title: "UI/UX Basics", content: "Learn the principles of UI and UX design." },
+      { title: "Wireframing & Prototyping", content: "Create interactive wireframes and prototypes." },
+      { title: "User Testing", content: "Test your designs with real users and gather feedback." }
+    ],
+    link: "https://matexdigital.com/enroll/uiuxdesign"
+  }
+};
+
 
     const urlParams = new URLSearchParams(window.location.search);
-    const courseKey = urlParams.get('course') || 'web';
+    const courseKey = urlParams.get('course') || 'graphics';
     const course = courseData[courseKey];
 
     if (course) {
@@ -181,8 +315,6 @@
       document.getElementById('courseTagline').innerText = course.tagline;
       document.getElementById('courseImage').src = course.image;
       document.getElementById('courseHeroImage').src = course.heroImage;
-      document.getElementById('courseDuration').innerText = course.duration;
-      document.getElementById('coursePrice').innerText = course.price;
       document.getElementById('enrollLink').href = course.link;
 
       const descList = document.getElementById('courseDescriptionList');
@@ -212,7 +344,7 @@
       const relatedContainer = document.getElementById('relatedCourses');
       related.forEach(key => {
         const btn = document.createElement('a');
-        btn.href = `course.html?course=${key}`;
+        btn.href = `courses.html?course=${key}`;
         btn.className = "btn btn-outline-primary btn-sm";
         btn.textContent = courseData[key].title;
         relatedContainer.appendChild(btn);
