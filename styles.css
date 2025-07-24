@@ -374,15 +374,11 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-.container .text-body-emphasis {
+/* .container .text-body-emphasis {
   text-align: center;
   color: #0D47A1 !important;
-}
-.lead {
-  text-align: justify !important;
-  margin-right: 10px !important;
-  margin-bottom: 20px !important;
-}
+} */
+
 
 /*Courses Section*/
  .course-card {
@@ -438,11 +434,27 @@ body {
       text-decoration: underline;
     }
 
-  .text-muted {
-    text-align: justify !important;
-    font-size: 1.25rem;
+  
+   .card-text {
+    font-size: 1rem !important;
     font-weight: 300;
   }
+  .small {
+    font-size: 1rem !important;
+    font-weight: 300;
+  }
+  .text-white {
+    font-size: 1rem !important;
+    font-weight: 300;
+  }
+  .form-label {
+    font-size: 1rem !important;
+    font-weight: 300;
+  }
+  .place-holder {
+    font-size: 1rem !important;
+    font-weight: 300;
+  } 
 .scroll-down-icon {
   position: absolute;
   bottom: 30px;
@@ -459,4 +471,20 @@ body {
   0% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(10px); }
   100% { transform: translateX(-50%) translateY(0); }
+}
+.bg-video {
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+.hero-section .card input,
+.hero-section .card select {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+}
+
+.hero-section .card button:hover {
+  background-color: #e6a800;
+  transition: all 0.3s ease-in-out;
 }
