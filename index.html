@@ -20,15 +20,14 @@
       overflow: unset !important;
     }
   }
-
+.hero-section{
+height: 80vh; overflow: hidden;
+}
   /* 2. Add top margin to About Section */
   #about {
-    margin-top: 11rem; /* Adjust this value if needed */
+    margin-top: 6rem; /* Adjust this value if needed */
   }
 
-  .headline{
-    margin-top: 5%;
-  }
 
   
 /*Courses Section*/
@@ -69,7 +68,7 @@ accordion-button:not(.collapsed) {
 
     .scroll-indicator {
       position: absolute;
-      bottom: 20px;
+      top: 80%;
       left: 50%;
       transform: translateX(-50%);
       animation: bounce 2s infinite;
@@ -138,7 +137,7 @@ accordion-button:not(.collapsed) {
 
    
    <!-- HERO SECTION -->
-<div class="hero-section position-relative text-white" id="home" style="height: 100vh; overflow: hidden;">
+<div class="hero-section position-relative text-white" id="home" >
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline class="bg-video position-absolute w-100 h-100" style="object-fit: cover; z-index: 1;">
@@ -154,100 +153,27 @@ accordion-button:not(.collapsed) {
 
       <!-- Motivational Text (Left) -->
 <!-- Hero Section -->
-<div class="col-lg-6 mb-5 mb-lg-0 d-flex align-items-center justify-content-center text-center">
-  <div class="hero-content">
-    <h1 class="headline display-4 fw-bold text-warning">Matex Digital</h1>
-    <p class="lead px-2">
-      Empowering the next generation with practical tech skills — from beginners to pros.
-      Join us and transform your future through technology.
-    </p>
+<div class="container-fluid vh-100 d-flex align-items-start justify-content-center text-center" >
+  <div class="col-lg-6" style="position: relative;">
+    <div class="hero-content">
+      <h1 class="headline display-4 fw-bold text-warning" style="padding-top: 10%;">Matex Digital</h1>
+      <p class="lead px-2">
+        Empowering the next generation with practical tech skills — from beginners to pros.
+        Join us and transform your future through technology.
+      </p>
 
- 
-   <div class="container" style="position: relative; margin-top: 20%;">
-  <div class="scroll-indicator text-center">
-    <a href="#" style="color: orange;">
-      <i class="bi bi-mouse2 fs-3"></i><br>
-      <i class="bi bi-chevron-down fs-4"></i>
-    </a>
+      <div class="scroll-indicator mt-5">
+        <a href="#" style="color: orange;">
+          <i class="bi bi-mouse2 fs-3"></i><br>
+          <i class="bi bi-chevron-down fs-4"></i>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
-  
-  </div>
-</div>
 
 
-<!-- Registration Form (Right) -->
-<div class="col-lg-6">
-  <div class="card bg-white text-dark p-4 rounded-4 shadow-lg" style="backdrop-filter: blur(10px);">
-    
-    <!-- Header -->
-    <h5 class="fw-bold mb-2" style="color: rgb(0, 0, 0); text-align: center; font-size: 2rem !important;">
-      <i class="bi bi-hand-index-thumb-down me-2"></i> 👇 Register Now
-    </h5>
-
-    <p class="text-muted small mb-4" style="font-size: 1.15rem !important;">
-      💡 Unlock your tech potential with <strong>Matex Digital</strong>. Gain in-demand skills, build confidence, and take charge of your digital future — one course at a time.
-    </p>
-
-    <form>
-      <!-- Full Name -->
-      <div class="mb-3">
-        <label for="fullname" class="form-label fw-semibold">
-          <i class="bi bi-person-fill me-1"></i> Full Name
-        </label>
-        <input type="text" class="form-control rounded-3 shadow-sm" id="fullname" placeholder="Enter full name">
-      </div>
-
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email" class="form-label fw-semibold">
-          <i class="bi bi-envelope-fill me-1"></i> Email
-        </label>
-        <input type="email" class="form-control rounded-3 shadow-sm" id="email" placeholder="example@mail.com">
-      </div>
-
-      <!-- Phone -->
-      <div class="mb-3">
-        <label for="phone" class="form-label fw-semibold">
-          <i class="bi bi-telephone-fill me-1"></i> Phone Number
-        </label>
-        <input type="tel" class="form-control rounded-3 shadow-sm" id="phone" placeholder="e.g. 0902 202 0614">
-      </div>
-
-      <!-- Course -->
-      <div class="mb-4">
-        <label for="course" class="form-label fw-semibold">
-          <i class="bi bi-journal-code me-1"></i> Select Course
-        </label>
-        <select class="form-select rounded-3 shadow-sm" id="course" onchange="toggleOtherCourse()">
-          <option selected disabled>Choose a course</option>
-          <option>Graphic Design</option>
-          <option>Web Development</option>
-          <option>Data Analysis</option>
-          <option>Desktop Publishing</option>
-          <option>Database Management</option>
-          <option>Office Management</option>
-          <option>Motion Graphics</option>
-          <option>3D Animation</option>
-          <option>Video Editing & Photography</option>
-          <option>Computer Engineering</option>
-          <option>Digital Marketing</option>
-          <option>Product Design</option>
-          <option>Coding</option>
-          <option value="other">Others</option>
-        </select>
-      </div>
-
-      <!-- Submit -->
-      <div class="d-grid">
-        <button type="submit" class="btn btn-warning rounded-pill fw-bold py-2 shadow-sm">
-          Register Now <i class="bi bi-arrow-right-circle ms-2"></i>
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
 
 
 
@@ -438,6 +364,78 @@ accordion-button:not(.collapsed) {
   </div>
 </section>
 
+
+  <!-- Registration Form Card -->
+  <div class="card bg-white text-dark p-4 rounded-4 shadow-lg" style="width: 500px; margin: 0px auto; padding: 20px !important;">
+
+    <!-- Header -->
+    <h5 class="fw-bold mb-2 text-center" style="font-size: 2rem;">
+      <i class="bi bi-hand-index-thumb-down me-2"></i>👇 Register Now
+    </h5>
+
+    <p class="text-muted small mb-4 text-center" style="font-size: 1.1rem;">
+      💡 Unlock your tech potential with <strong>Matex Digital</strong>. Gain in-demand skills, build confidence, and take charge of your digital future — one course at a time.
+    </p>
+
+    <form id="registrationForm" style="paddign: 10px;">
+      <!-- Full Name -->
+      <div class="mb-3">
+        <label for="fullname" class="form-label fw-semibold">
+          <i class="bi bi-person-fill me-1"></i> Full Name
+        </label>
+        <input type="text" class="form-control rounded-3 shadow-sm" id="fullname" placeholder="Enter full name">
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold">
+          <i class="bi bi-envelope-fill me-1"></i> Email
+        </label>
+        <input type="email" class="form-control rounded-3 shadow-sm" id="email" placeholder="example@mail.com">
+      </div>
+
+      <!-- Phone -->
+      <div class="mb-3">
+        <label for="phone" class="form-label fw-semibold">
+          <i class="bi bi-telephone-fill me-1"></i> Phone Number
+        </label>
+        <input type="tel" class="form-control rounded-3 shadow-sm" id="phone" placeholder="e.g. 0902 202 0614">
+      </div>
+
+      <!-- Course -->
+      <div class="mb-4">
+        <label for="course" class="form-label fw-semibold">
+          <i class="bi bi-journal-code me-1"></i> Select Course
+        </label>
+        <select class="form-select rounded-3 shadow-sm" id="course">
+          <option selected disabled>Choose a course</option>
+          <option>Graphic Design</option>
+          <option>Web Development</option>
+          <option>Data Analysis</option>
+          <option>Desktop Publishing</option>
+          <option>Database Management</option>
+          <option>Office Management</option>
+          <option>Motion Graphics</option>
+          <option>3D Animation</option>
+          <option>Video Editing & Photography</option>
+          <option>Computer Engineering</option>
+          <option>Digital Marketing</option>
+          <option>Product Design</option>
+          <option>Coding</option>
+          <option value="other">Others</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-warning rounded-pill fw-bold py-2 shadow-sm">
+          Register Now <i class="bi bi-arrow-right-circle ms-2"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+
 <footer class="text-white pt-5" style="background: linear-gradient(to right, #E53935, #0D47A1);" id="contact">
   <div class="container">
     <div class="row g-4">
@@ -520,4 +518,36 @@ accordion-button:not(.collapsed) {
 <!-- Include Bootstrap Icons CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $('#registrationForm').on('submit', function (e) {
+    e.preventDefault(); // prevent actual form submission
+
+    const fullName = $('#fullname').val();
+    const email = $('#email').val();
+    const phone = $('#phone').val();
+    const course = $('#course').val();
+
+    $.ajax({
+      url: 'https://matexdigital.fwh.is/processadd.php', // 🔁 Replace with the actual external endpoint
+      method: 'POST',
+      data: {
+        name: fullName,
+        email: email,
+        phone: phone,
+        course: course
+      },
+      success: function (response) {
+        alert('Registration successful!');
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        alert('Registration failed. Please try again.');
+        console.error(error);
+      }
+    });
+  });
+</script>
+
+
 </body>
