@@ -703,15 +703,12 @@ bottom: 31%;
 
           <!-- Submit Button -->
           <div class="d-grid">
-            <button type="submit" class="btn btn-warning btn-sm rounded-pill fw-bold py-2 shadow-sm">
+            <button type="submit" id="submitBtn" class="btn btn-warning btn-sm rounded-pill fw-bold py-2 shadow-sm">
               Register <i class="bi bi-arrow-right-circle ms-1"></i>
+              <span id="loadingSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
             </button>
           </div>
-
-            <button type="submit" class="btn btn-primary" id="submitBtn">
-            <span id="loadingSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
-            Submit
-          </button>
+          
         </form>
       </div>
 
