@@ -243,6 +243,12 @@ accordion-button:not(.collapsed) {
 bottom: 31%;
 }
 
+  /* Optional styling for smoother loading experience */
+  #submitBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
 </style>
 
 </head>
@@ -701,6 +707,11 @@ bottom: 31%;
               Register <i class="bi bi-arrow-right-circle ms-1"></i>
             </button>
           </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span id="loadingSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+            Submit
+          </button>
         </form>
       </div>
 
@@ -709,6 +720,23 @@ bottom: 31%;
 </div>
 
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-success">Thank You!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">Form submitted successfully. We will get back to you shortly!</p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Include Bootstrap Icons CDN -->
@@ -771,9 +799,17 @@ const phrases = [
 
 <script>
   const form = document.getElementById("registrationForm");
+  const submitButton = form.querySelector("button[type='submit']");
+  const formModal = document.getElementById("formModal"); // Your form modal
+  const successModal = document.getElementById("successModal"); // Your success modal
+  const loadingSpinner = document.getElementById("loadingSpinner"); // Optional loading spinner
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Disable submit button and show loading
+    submitButton.disabled = true;
+    if (loadingSpinner) loadingSpinner.style.display = "inline-block";
 
     fetch("https://script.google.com/macros/s/AKfycbyIF2oRaLwYFyGppYork1lgjV4QIrLkRTYXs1l8yMgxNpTuVNjO_2_LXw26iRuUak0D/exec", {
       method: "POST",
@@ -782,16 +818,31 @@ const phrases = [
     .then(response => response.text())
     .then(text => {
       if (text.trim() === "Success") {
-        alert("Form successfully submitted!");
         form.reset();
-      } 
+
+        // Close the form modal
+        if (formModal) {
+          const modalInstance = bootstrap.Modal.getInstance(formModal);
+          if (modalInstance) modalInstance.hide();
+        }
+
+        // Show the success modal
+        if (successModal) {
+          const successModalInstance = new bootstrap.Modal(successModal);
+          successModalInstance.show();
+        }
+      }
     })
     .catch((error) => {
-      console.error(error);
-      // Do nothing — or optionally show silent error
+      console.error("Submission error:", error);
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      if (loadingSpinner) loadingSpinner.style.display = "none";
     });
   });
 </script>
+
 
 
 
