@@ -91,70 +91,137 @@
   </style>
 </head>
 <body>
-
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <img id="courseHeroImage" src="" alt="Hero Image" class="hero-image" />
-    <div class="hero-title">
-      <h1 id="courseTitle" class="course-title">Loading...</h1>
-      <p id="courseTagline" class="course-description">Loading course details...</p>
+<body>
+  <!-- Course Title -->
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h1 id="courseTitle" class="display-5 fw-bold text-primary">
+        <i class="bi bi-journal-code me-2"></i>Loading...
+      </h1>
+      <p id="courseTagline" class="lead text-secondary">Loading course details...</p>
     </div>
-  </section>
 
-  <!-- Course Content -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="row g-5 align-items-start">
-        <div class="col-md-6">
-          <img id="courseImage" src="" alt="Course Image" class="course-img mb-4" />
+    <div class="row g-5 align-items-start">
+      <!-- Course Image -->
+      <div class="col-md-6">
+        <img id="courseImage" src="" alt="Course Image" class="img-fluid rounded-4 shadow-sm" />
+      </div>
+
+      <!-- Course Details -->
+      <div class="col-md-6">
+        <div class="mb-4">
+          <h4 class="text-dark fw-semibold mb-3">
+            <i class="bi bi-card-text me-2 text-primary"></i>Course Description
+          </h4>
+          <ul id="courseDescriptionList" class="list-group list-group-flush"></ul>
         </div>
 
-        <div class="col-md-6">
-          <h3 class="mb-3">Course Description</h3>
-          <ul id="courseDescriptionList" class="text-muted mb-4"></ul>
-
-          <h4 class="mb-3">Course Outline</h4>
+        <div class="mb-4">
+          <h5 class="text-dark fw-semibold mb-3">
+            <i class="bi bi-list-ul me-2 text-primary"></i>Course Outline
+          </h5>
           <div class="accordion" id="courseOutline"></div>
-
-          <a id="enrollLink" href="#" class="btn btn-primary mt-4" target="_blank">
-            Enroll Now <i class="bi bi-box-arrow-up-right ms-1"></i>
-          </a>
-
-          <div class="related-courses mt-5">
-            <h5>📚 Related Courses:</h5>
-            <div id="relatedCourses"></div>
-          </div>
         </div>
 
+        <a id="enrollLink" href="#" class="btn btn-lg btn-primary rounded-pill shadow-sm" target="_blank" >
+          <i class="bi bi-box-arrow-up-right me-2"></i>Enroll Now
+        </a>
+
+        <!-- Related Courses -->
+        <div class="related-courses mt-5">
+          <h6 class="fw-bold text-dark mb-2"><i class="bi bi-bookmark-star-fill me-2 text-warning"></i>Related Courses</h6>
+          <div id="relatedCourses" class="d-flex flex-wrap gap-2"></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Course Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="registrationModalLabel">Register for <span id="courseTitle">Course</span></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form id="registrationForm">
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="emailAddress" class="form-label">Email</label>
+            <input type="email" class="form-control" id="emailAddress" required>
+          </div>
+
+          <!-- Show course title (read-only) -->
+          <div class="mb-3">
+            <label class="form-label">Course</label>
+            <input type="text" class="form-control" id="selectedCourse" readonly>
+          </div>
+
+          <!-- Hidden input for actual course key (useful for backend submission) -->
+          <input type="hidden" name="courseKey" id="courseKey">
+
+          <div class="mb-3">
+            <label for="timeSlot" class="form-label">Preferred Time Slot</label>
+            <select class="form-select" id="timeSlot">
+              <option value="afternoon">Afternoon (1:00 PM - 2:00 PM)</option>
+              <option value="evening">Evening (7:00 PM - 8:00 PM)</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" >Register</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
+
+
+
+<script>
+
 const courseData = {
   graphics: {
     title: "Graphics Design",
     tagline: "Create stunning visuals for print and digital media.",
-    image: "images/data-analyst.png",
-    heroImage: "images/data-analyst.png",
+    image: "images/graphic.png",
     description: [
-      "Use Photoshop, Illustrator, and CorelDRAW.",
-      "Understand visual hierarchy and design principles.",
-      "Design for social media, print, and branding."
+      "This comprehensive graphic design course by Matex Digital is designed to equip learners with both the creative and technical skills required to excel in the design industry. Through hands-on projects and expert-led instruction, students will learn the fundamentals of visual communication, master industry-standard tools, and build a portfolio that demonstrates professional-level design proficiency.",
     ],
     outline: [
-      { title: "Design Theory", content: "Principles of design, color theory, and typography." },
-      { title: "CorelDRAW & Illustrator", content: "Vector design, logos, business cards, and layouts." },
-      { title: "Photoshop Projects", content: "Photo manipulation, mockups, flyers, and branding assets." }
+      { title: "Graphic Design Fundamentals", content: "Understand the basics of graphic design and visual communication." },
+      { title: "Mastering Design Tools", content: "Learn to use tools like Photoshop, Illustrator, and InDesign." },
+      { title: "Logo Design & Brand Identity Creation", content: "Design logos and create brand identities." },
+      { title: "Typography, Color, and Layout Mastery", content: "Work with fonts, colours, and layouts effectively." },
+      { title: "Designing for Impact", content: "Create designs for social media, flyers, and banners." },
+      { title: "Digital & Print Design", content: "Prepare designs for both digital and print use." },
+      { title: "UI/UX Design Basics", content: "Get introduced to UI/UX design and prototyping tools." },
+      { title: "Portfolio Building", content: "Build a professional design portfolio with real projects." },
     ],
-    link: "https://matexdigital.com/enroll/graphics"
+    link: "https://matexdigital.com/graphics-design"
   },
   python: {
     title: "Python Programming",
     tagline: "Learn Python from scratch and build powerful applications.",
     image: "https://via.placeholder.com/600x350?text=Python+Programming",
-    heroImage: "https://via.placeholder.com/1200x400?text=Python+Programming+Hero",
     description: [
       "Understand Python syntax and semantics.",
       "Build web apps and automation scripts.",
@@ -167,45 +234,52 @@ const courseData = {
     ],
     link: "https://matexdigital.com/enroll/python"
   },
-  videoEditing: {
+  linkEditing: {
     title: "Video Editing",
     tagline: "Master the art of editing videos with modern tools and techniques.",
-    image: "https://via.placeholder.com/600x350?text=Video+Editing",
-    heroImage: "https://via.placeholder.com/1200x400?text=Video+Editing+Hero",
+    image: "images/video.png",
     description: [
-      "Learn editing with Premiere Pro, Final Cut Pro, and DaVinci Resolve.",
-      "Edit for YouTube, Social Media, and Film production.",
-      "Understand color grading, sound design, and effects."
+      "This practical course teaches you how to create professional-quality videos using popular editing tools like Adobe Premiere Pro and CapCut. You'll learn how to cut, trim, add effects, transitions, music, and text — as well as export videos for social media, YouTube, or business use. Perfect for beginners, content creators, and aspiring editors.",
     ],
     outline: [
-      { title: "Introduction to Video Editing", content: "Learn the basics of cutting and stitching clips." },
-      { title: "Effects & Transitions", content: "Master effects, transitions, and compositing." },
-      { title: "Sound Design & Color Grading", content: "Improve audio and color for cinematic videos." }
+      { title: "Video Fundamentals", content: "Understand the basics of video formats, frame rates, and resolutions." },
+      { title: "Getting Started with Premiere Pro and CapCut", content: "Learn to use video editing software like Adobe Premiere Pro and CapCut." },
+      { title: "Cutting Like a Pro", content: "Cut, trim, and arrange video clips with smooth transitions." },
+      { title: "Enhance Your Story", content: "Add text, titles, music, and voiceovers to your videos." },
+      { title: "Mastering Color and Visual Effects in Video Editing", content: "Apply colour correction, filters, and visual effects." },
+      { title: "Creative Editing with Green Screen & Motion Graphic", content: "Work with green screen (chroma key) and motion graphics." },
+      { title: "Editing for Social Media, YouTube & Pro Platforms", content: "Edit for social media, YouTube, and professional use." },
+      { title: "Exporting Excellence", content: "Export high-quality videos in various formats." },
+      { title: "Portfolio Projects", content: "Build a portfolio of complete video editing projects." },
+      { title: "Real-World Practice", content: "Gain hands-on experience with real-world video content." },
     ],
-    link: "https://matexdigital.com/enroll/videoediting"
+    link: "https://matexdigital.com/video-editing"
   },
-  digitalMarketing: {
+  digital: {
     title: "Digital Marketing",
     tagline: "Learn how to market businesses effectively online with SEO, PPC, and Social Media.",
-    image: "https://via.placeholder.com/600x350?text=Digital+Marketing",
-    heroImage: "https://via.placeholder.com/1200x400?text=Digital+Marketing+Hero",
+    image: "",
     description: [
-      "Understand SEO, SEM, and PPC strategies.",
-      "Build and execute successful social media campaigns.",
-      "Track and measure digital marketing performance."
+      "Digital Marketing uses online channels to promote brands, engage customers, and drive business growth. This hands-on training equips participants with the essential tools, strategies, and skills to succeed in today’s digital economy.",
     ],
     outline: [
-      { title: "Introduction to Digital Marketing", content: "Basics of online marketing and strategies." },
-      { title: "SEO & SEM", content: "Learn search engine optimization and marketing techniques." },
-      { title: "Social Media Advertising", content: "Promote on Facebook, Instagram, and Google Ads." }
+      { title: "Digital Marketing 101", content: "Understand the fundamentals of digital marketing and online strategy." },
+      { title: "Social Media Growth", content: "Learn how to grow a business using social media platforms." },
+      { title: "Ad Mastery", content: "Run effective Facebook, Instagram, and Google ad campaigns." },
+      { title: "Content Creation for Social Media & Web Platforms", content: "Master content creation for social media and web platforms." },
+      { title: "SEO Essentials", content: "Learn SEO (Search Engine Optimization) to increase website traffic." },
+      { title: "Email Marketing Made Simple", content: "Understand email marketing and how to build email campaigns." },
+      { title: "Data-Driven Marketing", content: "Use tools like Google Analytics to track and analyse performance." },
+      { title: "Sales Funnels", content: "Create marketing funnels to convert visitors into customers." },
+      { title: "Strategic Planning", content: "Develop and manage digital marketing plans and budgets." },
+      { title: "Online Branding", content: "Build a strong personal or business brand online." },
     ],
-    link: "https://matexdigital.com/enroll/digitalmarketing"
+    link: "https://matexdigital.com/digitalmarketing"
   },
   webdev: {
     title: "Web Development",
     tagline: "Master modern web technologies and create responsive websites.",
     image: "https://via.placeholder.com/600x350?text=Web+Development",
-    heroImage: "https://via.placeholder.com/1200x400?text=Web+Development+Hero",
     description: [
       "Learn HTML, CSS, and JavaScript.",
       "Build responsive websites and apps.",
@@ -216,30 +290,34 @@ const courseData = {
       { title: "Responsive Web Design", content: "Mobile-first design and CSS Flexbox." },
       { title: "Backend with Node.js", content: "Building APIs and integrating databases." }
     ],
-    link: "https://matexdigital.com/enroll/webdev"
+    link: "https://matexdigital.com/webdev"
   },
-  dataScience: {
-    title: "Data Science",
-    tagline: "Unlock the power of data with Python and R for data analysis and machine learning.",
+  engineering: {
+    title: "Computer Engineering",
+    tagline: "Unlock your troubleshooting power by learning how to repair, assemble, install operating system and maintaining computer system.",
     image: "https://via.placeholder.com/600x350?text=Data+Science",
-    heroImage: "https://via.placeholder.com/1200x400?text=Data+Science+Hero",
     description: [
-      "Learn data analysis with Python, R, and SQL.",
-      "Understand data visualization and statistics.",
-      "Build machine learning models."
+      "This hands-on course provides foundational to advanced knowledge in computer engineering. Learn how to assemble, repair, and maintain computers, install operating systems, troubleshoot hardware and software issues, and understand basic networking. Designed for aspiring technicians, IT support staff, and anyone interested in building a tech career.",
     ],
     outline: [
-      { title: "Data Wrangling", content: "Clean and prepare data for analysis." },
-      { title: "Data Visualization", content: "Visualize data with tools like Tableau and Matplotlib." },
-      { title: "Machine Learning", content: "Build predictive models using scikit-learn." }
+      { title: "Computer Hardware Basics", content: "Understand the basics of computer hardware and system components." },
+      { title: "PC Assembly, Upgrades & Troubleshooting Essentials", content: "Learn how to assemble, upgrade, and troubleshoot computers." },
+      { title: "Operating Systems", content: "Study how operating systems work and how to install them." },
+      { title: "Intro to Computer Networking & Basic Configuration", content: "Learn the fundamentals of computer networking and configurations." },
+      { title: "Understanding BIOS, CMOS & System Boot Processes", content: "Understand BIOS, CMOS settings, and system boot processes." },
+      { title: "Diagnosing & Repairing Hardware and Software Issues", content: "Diagnose and repair common hardware and software issues." },
+      { title: "System Protection", content: "Learn data backup, recovery, and system security basics." },
+      { title: "Getting Started with Microprocessors & Embedded Systems", content: "Get introduced to microprocessors and embedded systems.." },
+      { title: "IT Infrastructure", content: "Understand how to maintain and manage IT infrastructure." },
+      { title: "Practical Workshop", content: "Gain hands-on experience with real-life repair and maintenance tasks." },
     ],
-    link: "https://matexdigital.com/enroll/datascience"
+    link: "https://matexdigital.com/engineering"
   },
+
   ai: {
-    title: "Artificial Intelligence",
+    title: "Desktop Publishing",
     tagline: "Learn AI concepts and algorithms to build smart applications.",
-    image: "https://via.placeholder.com/600x350?text=AI+Programming",
-    heroImage: "https://via.placeholder.com/1200x400?text=AI+Hero",
+    image: "images/desktop.png",
     description: [
       "Understand machine learning and deep learning algorithms.",
       "Build AI models using TensorFlow and PyTorch.",
@@ -250,13 +328,33 @@ const courseData = {
       { title: "Deep Learning", content: "Master neural networks and deep learning architectures." },
       { title: "AI Deployment", content: "Deploy AI models in production environments." }
     ],
-    link: "https://matexdigital.com/enroll/ai"
+    link: "https://matexdigital.com/"
   },
+ desktop: {
+    title: "Desktop Publishing",
+    tagline: "Learn how to design professional documents for print & digital use.",
+    image: "images/desktop.png",
+    description: [
+      "This course teaches you how to design and produce professional documents for print and digital use using tools like Adobe InDesign and CorelDRAW. Learn to create flyers, brochures, magazines, business cards, and more with strong layout, typography, and visual design principles. Ideal for beginners, marketers, and aspiring publishers.",
+
+    ],
+    outline: [
+      { title: "Introduction to Desktop Publishing and Layout Design", content: "Understand the basics of desktop publishing and design layout." },
+      { title: "Mastering Adobe InDesign and CorelDRAW for Publishing", content: "Learn to use publishing tools like Adobe InDesign and CorelDRAW." },
+      { title: "Designing Newsletters, Brochures & Magazines Like a Pro", content: "Design and format newsletters, brochures, and magazines." },
+      { title: "Working with Text, Images & Page Layouts Effectively", content: "Work with text, images, and page layouts professionally." },
+      { title: "Creating Print-Ready Business Cards, Flyers & More", content: "Create print-ready materials like business cards and flyers." },
+      { title: "Applying Design Principles for Clear & Appealing Layouts", content: "Apply design principles for clarity and visual appeal." },
+      { title: "Exporting for Print and Digital", content: "Export files correctly for printing and digital use." },
+      { title: "Portfolio Building", content: "Build a portfolio of completed desktop publishing projects." },
+    ],
+    link: "https://matexdigital.com/desktop-publishing"
+  },
+
   iosDev: {
     title: "iOS Development",
     tagline: "Become an expert in developing apps for Apple's iOS platform.",
     image: "https://via.placeholder.com/600x350?text=iOS+Development",
-    heroImage: "https://via.placeholder.com/1200x400?text=iOS+Development+Hero",
     description: [
       "Learn Swift programming for iOS app development.",
       "Build apps with Xcode and iOS SDK.",
@@ -273,7 +371,6 @@ const courseData = {
     title: "Android Development",
     tagline: "Develop and deploy powerful apps for Android devices.",
     image: "https://via.placeholder.com/600x350?text=Android+Development",
-    heroImage: "https://via.placeholder.com/1200x400?text=Android+Development+Hero",
     description: [
       "Learn Java and Kotlin for Android app development.",
       "Build apps with Android Studio.",
@@ -286,11 +383,10 @@ const courseData = {
     ],
     link: "https://matexdigital.com/enroll/androiddev"
   },
-  uiuxDesign: {
+  uxDesign: {
     title: "UI/UX Design",
     tagline: "Learn the principles of user interface and experience design.",
     image: "https://via.placeholder.com/600x350?text=UI/UX+Design",
-    heroImage: "https://via.placeholder.com/1200x400?text=UI/UX+Design+Hero",
     description: [
       "Understand wireframing, prototyping, and user testing.",
       "Master tools like Figma, Adobe XD, and Sketch.",
@@ -314,7 +410,6 @@ const courseData = {
       document.getElementById('courseTitle').innerText = course.title;
       document.getElementById('courseTagline').innerText = course.tagline;
       document.getElementById('courseImage').src = course.image;
-      document.getElementById('courseHeroImage').src = course.heroImage;
       document.getElementById('enrollLink').href = course.link;
 
       const descList = document.getElementById('courseDescriptionList');
@@ -353,6 +448,9 @@ const courseData = {
       document.getElementById('courseTitle').innerText = "Course Not Found";
       document.getElementById('courseTagline').innerText = "The requested course does not exist.";
     }
+
+    
   </script>
+  
 </body>
 </html>
