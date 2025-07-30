@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matex Digital | Computer Training Institute in Nigeria</title>
   <meta name="description" content="Matex Digital is a leading computer training institute in Nigeria, offering practical courses in web development, graphic design, digital marketing, and more. Learn real-world tech skills today." />
-<meta name="keywords" content="Matex Digital, Matex Institute, Matex computer training, Matex courses, web design, desktop publishing, graphic design, computer engineering, IT support, software training, data analysis, video editing, business computing, mobile app training, digital marketing, data processing, computer basics, programming classes, Microsoft Office training, networking courses, database management, tech skills, computer literacy, coding bootcamp" />
+  <meta name="keywords" content="Matex Digital, Matex Institute, Matex computer training, Matex courses, web design, desktop publishing, graphic design, computer engineering, IT support, software training, data analysis, video editing, business computing, mobile app training, digital marketing, data processing, computer basics, programming classes, Microsoft Office training, networking courses, database management, tech skills, computer literacy, coding bootcamp" />
   <meta name="author" content="Matex Digital" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://matexdigital.com/" />
@@ -17,7 +17,7 @@
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
   <meta property="og:title" content="Matex Digital | Computer Training Institute in Nigeria" />
-   <meta property="og:description" content="Matex Digital is Nigeria’s trusted computer training institute. We offer practical courses in business computing, IT support, web design, data analysis, graphic design, video editing, mobile apps, software training, digital marketing, and more." />
+   <meta property="og:description" content="Matex Digital is Nigeria’s trusted computer training institute. We offer practical courses in IT support, web design, data analysis, graphic design, video editing, mobile apps, software training, digital marketing, and more." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://matexdigital.com/" />
   <meta property="og:image" content="https://matexdigital.com/images/matex%20logo.png" />
@@ -242,6 +242,12 @@ accordion-button:not(.collapsed) {
   position: fixed;
 bottom: 31%;
 }
+
+  /* Optional styling for smoother loading experience */
+  #submitBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 
 </style>
 
@@ -652,7 +658,7 @@ bottom: 31%;
             <label for="fullname" class="form-label small fw-semibold mb-1">
               <i class="bi bi-person-fill me-1"></i> Full Name
             </label>
-            <input type="text" class="form-control form-control-sm rounded-3 shadow-sm" id="fullname" placeholder="Full name">
+            <input name="Fullname" type="text" class="form-control form-control-sm rounded-3 shadow-sm" id="fullname" placeholder="Full name">
           </div>
 
           <!-- Email -->
@@ -660,7 +666,7 @@ bottom: 31%;
             <label for="email" class="form-label small fw-semibold mb-1">
               <i class="bi bi-envelope-fill me-1"></i> Email
             </label>
-            <input type="email" class="form-control form-control-sm rounded-3 shadow-sm" id="email" placeholder="Email">
+            <input name="Email" type="email" class="form-control form-control-sm rounded-3 shadow-sm" id="email" placeholder="Email">
           </div>
 
           <!-- Phone -->
@@ -668,7 +674,7 @@ bottom: 31%;
             <label for="phone" class="form-label small fw-semibold mb-1">
               <i class="bi bi-telephone-fill me-1"></i> Phone
             </label>
-            <input type="tel" class="form-control form-control-sm rounded-3 shadow-sm" id="phone" placeholder="Phone">
+            <input name="Contact" type="tel" class="form-control form-control-sm rounded-3 shadow-sm" id="phone" placeholder="Phone">
           </div>
 
           <!-- Course -->
@@ -676,7 +682,7 @@ bottom: 31%;
             <label for="course" class="form-label small fw-semibold mb-1">
               <i class="bi bi-journal-code me-1"></i> Course
             </label>
-            <select class="form-select form-select-sm rounded-3 shadow-sm" id="course">
+            <select name="Course" class="form-select form-select-sm rounded-3 shadow-sm" id="course">
               <option selected disabled>Choose course</option>
               <option>Graphic Design</option>
               <option>Web Development</option>
@@ -697,10 +703,12 @@ bottom: 31%;
 
           <!-- Submit Button -->
           <div class="d-grid">
-            <button type="submit" class="btn btn-warning btn-sm rounded-pill fw-bold py-2 shadow-sm">
+            <button type="submit" id="submitBtn" class="btn btn-warning btn-sm rounded-pill fw-bold py-2 shadow-sm">
               Register <i class="bi bi-arrow-right-circle ms-1"></i>
+              <span id="loadingSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
             </button>
           </div>
+          
         </form>
       </div>
 
@@ -709,6 +717,23 @@ bottom: 31%;
 </div>
 
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-success">Thank You!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">Form submitted successfully. We will get back to you shortly!</p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Include Bootstrap Icons CDN -->
@@ -768,6 +793,54 @@ const phrases = [
     preloader.style.display = "none";
   });
 </script>
+
+<script>
+  const form = document.getElementById("registrationForm");
+  const submitButton = form.querySelector("button[type='submit']");
+  const formModal = document.getElementById("formModal"); // Your form modal
+  const successModal = document.getElementById("successModal"); // Your success modal
+  const loadingSpinner = document.getElementById("loadingSpinner"); // Optional loading spinner
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Disable submit button and show loading
+    submitButton.disabled = true;
+    if (loadingSpinner) loadingSpinner.style.display = "inline-block";
+
+    fetch("https://script.google.com/macros/s/AKfycbyIF2oRaLwYFyGppYork1lgjV4QIrLkRTYXs1l8yMgxNpTuVNjO_2_LXw26iRuUak0D/exec", {
+      method: "POST",
+      body: new FormData(form),
+    })
+    .then(response => response.text())
+    .then(text => {
+      if (text.trim() === "Success") {
+        form.reset();
+
+        // Close the form modal
+        if (formModal) {
+          const modalInstance = bootstrap.Modal.getInstance(formModal);
+          if (modalInstance) modalInstance.hide();
+        }
+
+        // Show the success modal
+        if (successModal) {
+          const successModalInstance = new bootstrap.Modal(successModal);
+          successModalInstance.show();
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Submission error:", error);
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      if (loadingSpinner) loadingSpinner.style.display = "none";
+    });
+  });
+</script>
+
+
 
 
 </body>
