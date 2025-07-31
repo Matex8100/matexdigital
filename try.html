@@ -1,83 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Creative Bulb Clip Image Design</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard UI</title>
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
   <style>
     body {
-      background-color: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
       height: 100vh;
-    }
-
-    .image-container {
-      position: relative;
-      width: 300px;
-      height: 400px;
-    }
-
-    .bulb-background {
-      position: absolute;
+      width: 250px;
+      position: fixed;
       top: 0;
+      left: -250px;
+      background-color: #343a40;
+      color: white;
+      padding-top: 20px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.show {
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
     }
 
-    .clip-image {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      clip-path: url(#bulbClip);
-      transition: all 0.5s ease;
+    .sidebar .nav-link {
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      transition: background-color 0.3s ease;
     }
 
-    .clip-image.one {
-      z-index: 3;
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: #495057;
     }
 
-    .clip-image.two {
-      transform: translate(15px, 15px) scale(0.95);
-      opacity: 0.8;
-      z-index: 2;
-      filter: brightness(0.9);
+    .sidebar .nav-link i {
+      margin-right: 10px;
     }
 
-    .clip-image.three {
-      transform: translate(30px, 30px) scale(0.9);
-      opacity: 0.5;
-      z-index: 1;
-      filter: blur(2px);
+    /* Hamburger */
+    .hamburger {
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      color: #343a40;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 0;
+      padding: 60px 30px 30px 30px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .main-content.shift {
+      margin-left: 250px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    @media (min-width: 768px) {
+      .sidebar {
+        left: 0;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 250px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- SVG Clip Path Definition -->
-  <svg width="0" height="0">
-    <defs>
-      <clipPath id="bulbClip" clipPathUnits="objectBoundingBox">
-        <path d="M0.5,0 C0.7,0,1,0.2,1,0.5 C1,0.75,0.75,0.9,0.65,1 H0.35 C0.25,0.9,0,0.75,0,0.5 C0,0.2,0.3,0,0.5,0 Z" />
-      </clipPath>
-    </defs>
-  </svg>
+  <!-- Hamburger Button -->
+  <div class="hamburger" id="hamburger"><i class="bi bi-list"></i></div>
 
-  <div class="image-container">
-    <!-- Background Bulb SVG Shape -->
-    <svg class="bulb-background" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid meet">
-      <path d="M100,0 C140,0,200,60,200,150 C200,220,150,270,130,300 H70 C50,270,0,220,0,150 C0,60,60,0,100,0 Z"
-            fill="#f4f4f4"/>
-    </svg>
-
-    <!-- Layered Clipped Images -->
-    <img src="images/data-analyst.png" alt="Bulb Clipped Image 1" class="clip-image one">
-    <img src="images/Hero-background.png" alt="Bulb Clipped Image 2" class="clip-image two">
-    <img src="images/data-ast.png" alt="Bulb Clipped Image 3" class="clip-image three">
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h4 class="text-center text-white mb-4"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h4>
+    <a href="#" class="nav-link active"><i class="bi bi-house-fill"></i> Home</a>
+    <a href="#" class="nav-link">
+      <i class="bi bi-chat-dots-fill"></i> Chat
+      <span class="badge bg-danger ms-auto">2</span>
+    </a>
+    <a href="#" class="nav-link"><i class="bi bi-briefcase-fill"></i> Jobs</a>
+    <a href="#" class="nav-link"><i class="bi bi-person-fill"></i> Profile</a>
+    <a href="#" class="nav-link mt-auto"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
-jfjfjfjfjfjfjfjfjfjjffjhhshhsshhs
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <h2 class="mb-4">Welcome back!</h2>
+
+    <div class="row g-4">
+
+      <!-- Reference Card -->
+      <div class="col-md-4">
+        <div class="card bg-white shadow-sm p-4">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-journal-text fs-3 text-info me-3"></i>
+            <div>
+              <h5 class="mb-1">Reference</h5>
+              <p class="text-muted mb-0">15 articles saved</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs Done Card -->
+      <div class="col-md-4">
+        <div class="card bg-white shadow-sm p-4">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-check2-circle fs-3 text-success me-3"></i>
+            <div>
+              <h5 class="mb-1">Jobs Done</h5>
+              <p class="text-muted mb-0">10 jobs completed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Available Jobs Card -->
+      <div class="col-md-4">
+        <div class="card bg-white shadow-sm p-4">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-briefcase fs-3 text-warning me-3"></i>
+            <div>
+              <h5 class="mb-1">Available Jobs</h5>
+              <p class="text-muted mb-0">5 jobs posted today</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section: Recent Chat Preview -->
+    <div class="mt-5">
+      <h4 class="mb-3">Recent Chats</h4>
+      <ul class="list-group shadow-sm">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          John Doe <span class="badge bg-primary rounded-pill">2 new</span>
+        </li>
+        <li class="list-group-item">Sarah posted a job update</li>
+        <li class="list-group-item">New profile view from HR Team</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Sidebar Toggle Script -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
+    const mainContent = document.getElementById('mainContent');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+      mainContent.classList.toggle('shift');
+    });
+  </script>
 </body>
 </html>

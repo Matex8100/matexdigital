@@ -14,6 +14,102 @@
       color: #333;
     }
 
+    /* Base modal style */
+.modal-content {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 255, 0.95));
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Form fields */
+.form-control,
+.form-select {
+  border-radius: 0.75rem;
+  border: 1px solid #cfd8dc;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 0 transparent;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 0.2rem rgba(66, 165, 245, 0.25);
+  background-color: #ffffff;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Input placeholder style */
+.form-control::placeholder {
+  color: #9e9e9e;
+  font-style: italic;
+}
+
+/* Modal header enhancements */
+.modal-header {
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1565C0, #1E88E5);
+  transform: scale(1.02);
+}
+
+.btn-outline-secondary {
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #eceff1;
+  color: #000;
+  border-color: #cfd8dc;
+}
+
+/* Modal footer border removal */
+.modal-footer {
+  border-top: none;
+}
+
+/* Icon size adjustment */
+.form-label i {
+  font-size: 1rem;
+}
+
+/* Smooth hover on fields */
+.form-control:hover,
+.form-select:hover {
+  border-color: #90caf9;
+}
+
+/* Responsive enhancement */
+@media (max-width: 576px) {
+  .modal-content {
+    border-radius: 0.5rem;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
+  }
+}
+
     .hero-section {
       position: relative;
       height: 350px;
@@ -92,6 +188,44 @@
 </head>
 <body>
 <body>
+  <!--Navigation Bar-->
+
+ <header class="navbar navbar-expand-lg bg-white border-bottom py-3 sticky-top" >
+  <div class="container-fluid px-4">
+    
+    <!-- Logo and Brand -->
+    <a href="/" class="navbar-brand d-flex align-items-center">
+      <img src="images/matex_logo2-removebg-preview.png" alt="Computer Training Logo" style="width: 150px;" class="me-2">
+    </a>
+
+    <!-- Hamburger toggle button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navigation links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-lg-center">
+        <li class="nav-item">
+          <a href="#home" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="index.html#about" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="#courses" class="nav-link">Courses</a>
+        </li>
+        <!-- Enroll link for small screens -->
+        <li class="nav-item d-lg-none">
+          <a href="#contact" class="nav-link">Contact Us</a>
+        </li>
+      </ul>
+      <!-- Enroll button for large screens -->
+      <a href="#contact"  class="btn btn-danger ms-lg-3 d-none d-lg-inline-block">Contact Us</a>
+    </div>
+  </div>
+</header>
+
   <!-- Course Title -->
   <div class="container py-5">
     <div class="text-center mb-4">
@@ -123,9 +257,10 @@
           <div class="accordion" id="courseOutline"></div>
         </div>
 
-        <a id="enrollLink" href="#" class="btn btn-lg btn-primary rounded-pill shadow-sm" target="_blank" >
-          <i class="bi bi-box-arrow-up-right me-2"></i>Enroll Now
-        </a>
+    <button id="enrollLink" class="btn btn-lg btn-primary rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#registrationModal">
+  <i class="bi bi-box-arrow-up-right me-2"></i>Enroll Now
+</button>
+
 
         <!-- Related Courses -->
         <div class="related-courses mt-5">
@@ -136,57 +271,170 @@
     </div>
   </div>
 
-  <!-- Course Registration Modal -->
+ <!-- Course Registration Modal -->
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content shadow-sm border-0 rounded-4">
 
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="registrationModalLabel">Register for <span id="courseTitle">Course</span></h5>
+      <!-- Gradient Header -->
+      <div class="modal-header text-white rounded-top-4" style="background: linear-gradient(135deg, #1976D2, #42A5F5);">
+        <h5 class="modal-title d-flex align-items-center gap-2 fs-6" id="registrationModalLabel">
+          <i class="bi bi-person-plus-fill fs-5"></i>
+          Register for <span id="modalCourseTitle" class="fw-semibold">Course</span>
+        </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form id="registrationForm">
-        <div class="modal-body">
+      <!-- Registration Form -->
+      <div class="p-3">
+        <form id="registrationForm" style="font-size: 0.9rem;" style="max-width: 70%;">
 
+          <!-- Full Name -->
           <div class="mb-3">
-            <label for="fullName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="fullName" required>
+            <label for="fullName" class="form-label fw-medium">Full Name</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-person-fill"></i></span>
+              <input type="text" class="form-control" id="fullName" placeholder="Your name" required>
+            </div>
           </div>
 
+          <!-- Email -->
           <div class="mb-3">
-            <label for="emailAddress" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailAddress" required>
+            <label for="emailAddress" class="form-label fw-medium">Email Address</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-envelope-fill"></i></span>
+              <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com" required>
+            </div>
           </div>
 
-          <!-- Show course title (read-only) -->
+          <!-- Phone Number -->
           <div class="mb-3">
-            <label class="form-label">Course</label>
-            <input type="text" class="form-control" id="selectedCourse" readonly>
+            <label for="phoneNumber" class="form-label fw-medium">Phone Number</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-telephone-fill"></i></span>
+              <input type="tel" class="form-control"
+                     id="phoneNumber"
+                     placeholder="+234 8123456789"
+                     pattern="^\+(1|91|234)[0-9\s\-]{7,15}$"
+                     required>
+            </div>
+            <small class="text-muted">Only +1, +91, or +234 allowed</small>
           </div>
 
-          <!-- Hidden input for actual course key (useful for backend submission) -->
-          <input type="hidden" name="courseKey" id="courseKey">
-
+          <!-- Course Name (readonly) -->
           <div class="mb-3">
-            <label for="timeSlot" class="form-label">Preferred Time Slot</label>
-            <select class="form-select" id="timeSlot">
-              <option value="afternoon">Afternoon (1:00 PM - 2:00 PM)</option>
-              <option value="evening">Evening (7:00 PM - 8:00 PM)</option>
-            </select>
+            <label for="selectedCourse" class="form-label fw-medium">Course</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-journal-code"></i></span>
+              <input type="text" class="form-control bg-light" id="selectedCourse" readonly>
+            </div>
           </div>
 
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" >Register</button>
-        </div>
-      </form>
+          <!-- Time Slot -->
+          <div class="mb-3">
+            <label for="timeSlot" class="form-label fw-medium">Preferred Time Slot</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary text-white"><i class="bi bi-clock-fill"></i></span>
+              <select class="form-select" id="timeSlot" required>
+                <option value="" selected disabled>Choose a time slot</option>
+                <option value="afternoon">Afternoon (1–2 PM)</option>
+                <option value="evening">Evening (7–8 PM)</option>
+              </select>
+            </div>
+          </div>
 
+          <!-- Submit Button -->
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary btn-sm px-4 rounded-pill">
+              <i class="bi bi-send-fill me-1"></i> Submit
+            </button>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
+
+
+<footer class="text-white pt-5" style="background: linear-gradient(to right, #E53935, #0D47A1);" id="contact">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- About Matex with Logo -->
+      <div class="col-md-3">
+        <img src="images/matex-logo-white.png" alt="Matex Digital Logo" style="width: 150px;" class="mb-3">
+        <h5 class="fw-bold mb-3 text-white">About Matex Digital</h5>
+        <p class="small text-white" style="text-align: justify;">
+          Matex Digital is committed to raising the next generation of tech-savvy individuals by delivering hands-on ICT training in Data Analysis, Graphic Design, Web Development, and more.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3">
+        <h5 class="fw-bold mb-3 text-white">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#about" class="text-white text-decoration-none d-block mb-2">About Us</a></li>
+          <li><a href="#courses" class="text-white text-decoration-none d-block mb-2">Courses</a></li>
+          <li><a href="#contact" class="text-white text-decoration-none d-block mb-2" >Contact</a></li>
+          <li><a href="tel:+2349022020614" class="text-white text-decoration-none d-block mb-2">Enroll Now</a></li>
+        </ul>
+      </div>
+
+      <!-- Facebook & WhatsApp -->
+      <div class="col-md-3">
+        <h5 class="fw-bold mb-3 text-white">Follow Us</h5>
+        <div>
+          <a href="https://www.facebook.com/matexdigital" target="_blank" class="text-white text-decoration-none">
+            <i class="bi bi-facebook fs-4 me-2 text-white"></i> Facebook Page
+          </a>
+        </div>
+        <div class="mt-3">
+          <a href="https://wa.link/ej26rx" class="text-white text-decoration-none">
+            <i class="bi bi-whatsapp fs-4 me-2 text-white"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div class="col-md-3">
+        <h5 class="fw-bold mb-3 text-white">Gallery</h5>
+        <div class="row g-2">
+          <div class="col-4"><img src="images/data-analyst.png" class="img-fluid rounded" alt="Gallery image 1"></div>
+          <div class="col-4"><img src="images/graphic-designer.png" class="img-fluid rounded" alt="Gallery image 2"></div>
+          <div class="col-4"><img src="images/web-dev.png" class="img-fluid rounded" alt="Gallery image 3"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="border-light mt-5" />
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center py-3">
+      <p class="mb-0 text-white">© 2025 Matex Digital. All rights reserved.</p>
+      <ul class="list-unstyled d-flex gap-3 mb-0">
+  <li>
+    <a class="text-white fs-5" href="https://www.facebook.com/matexdigital" target="_blank">
+      <i class="bi bi-facebook"></i>
+    </a>
+  </li>
+  <li>
+    <a class="text-white fs-5" href="https://wa.link/ej26rx" target="_blank">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+  </li>
+  <li>
+  <a class="text-white fs-5" href="tel:+2349022020614">
+    <i class="bi bi-telephone-fill"></i>
+  </a>
+</li>
+
+</ul>
+
+    </div>
+  </div>
+</footer>
 
 
 </body>
@@ -197,6 +445,14 @@
 
 
 <script>
+
+// Prefill modal with course data
+document.getElementById('enrollLink').addEventListener('click', () => {
+  document.getElementById('modalCourseTitle').innerText = course.title;
+  document.getElementById('selectedCourse').value = course.title;
+  document.getElementById('courseKey').value = courseKey;
+});
+
 
 const courseData = {
   graphics: {
@@ -218,23 +474,7 @@ const courseData = {
     ],
     link: "https://matexdigital.com/graphics-design"
   },
-  python: {
-    title: "Python Programming",
-    tagline: "Learn Python from scratch and build powerful applications.",
-    image: "https://via.placeholder.com/600x350?text=Python+Programming",
-    description: [
-      "Understand Python syntax and semantics.",
-      "Build web apps and automation scripts.",
-      "Explore data analysis and machine learning."
-    ],
-    outline: [
-      { title: "Introduction to Python", content: "Variables, data types, functions, and control flow." },
-      { title: "Object-Oriented Programming", content: "Classes, inheritance, and polymorphism." },
-      { title: "Web Development with Flask", content: "Building dynamic websites and web apps." }
-    ],
-    link: "https://matexdigital.com/enroll/python"
-  },
-  linkEditing: {
+  videoediting: {
     title: "Video Editing",
     tagline: "Master the art of editing videos with modern tools and techniques.",
     image: "images/video.png",
@@ -258,12 +498,12 @@ const courseData = {
   digital: {
     title: "Digital Marketing",
     tagline: "Learn how to market businesses effectively online with SEO, PPC, and Social Media.",
-    image: "",
+    image: "images/digital.jpeg",
     description: [
       "Digital Marketing uses online channels to promote brands, engage customers, and drive business growth. This hands-on training equips participants with the essential tools, strategies, and skills to succeed in today’s digital economy.",
     ],
     outline: [
-      { title: "Digital Marketing 101", content: "Understand the fundamentals of digital marketing and online strategy." },
+      { title: "Digital Marketing ", content: "Understand the fundamentals of digital marketing and online strategy." },
       { title: "Social Media Growth", content: "Learn how to grow a business using social media platforms." },
       { title: "Ad Mastery", content: "Run effective Facebook, Instagram, and Google ad campaigns." },
       { title: "Content Creation for Social Media & Web Platforms", content: "Master content creation for social media and web platforms." },
@@ -279,7 +519,7 @@ const courseData = {
   webdev: {
     title: "Web Development",
     tagline: "Master modern web technologies and create responsive websites.",
-    image: "https://via.placeholder.com/600x350?text=Web+Development",
+    image: "images/webd.png",
     description: [
       "Learn HTML, CSS, and JavaScript.",
       "Build responsive websites and apps.",
@@ -295,7 +535,7 @@ const courseData = {
   engineering: {
     title: "Computer Engineering",
     tagline: "Unlock your troubleshooting power by learning how to repair, assemble, install operating system and maintaining computer system.",
-    image: "https://via.placeholder.com/600x350?text=Data+Science",
+    image: "images/engering.jpeg",
     description: [
       "This hands-on course provides foundational to advanced knowledge in computer engineering. Learn how to assemble, repair, and maintain computers, install operating systems, troubleshoot hardware and software issues, and understand basic networking. Designed for aspiring technicians, IT support staff, and anyone interested in building a tech career.",
     ],
@@ -312,23 +552,6 @@ const courseData = {
       { title: "Practical Workshop", content: "Gain hands-on experience with real-life repair and maintenance tasks." },
     ],
     link: "https://matexdigital.com/engineering"
-  },
-
-  ai: {
-    title: "Desktop Publishing",
-    tagline: "Learn AI concepts and algorithms to build smart applications.",
-    image: "images/desktop.png",
-    description: [
-      "Understand machine learning and deep learning algorithms.",
-      "Build AI models using TensorFlow and PyTorch.",
-      "Deploy AI models into real-world applications."
-    ],
-    outline: [
-      { title: "Introduction to AI", content: "Learn the fundamentals of AI and machine learning." },
-      { title: "Deep Learning", content: "Master neural networks and deep learning architectures." },
-      { title: "AI Deployment", content: "Deploy AI models in production environments." }
-    ],
-    link: "https://matexdigital.com/"
   },
  desktop: {
     title: "Desktop Publishing",
@@ -351,38 +574,53 @@ const courseData = {
     link: "https://matexdigital.com/desktop-publishing"
   },
 
-  iosDev: {
-    title: "iOS Development",
-    tagline: "Become an expert in developing apps for Apple's iOS platform.",
-    image: "https://via.placeholder.com/600x350?text=iOS+Development",
-    description: [
-      "Learn Swift programming for iOS app development.",
-      "Build apps with Xcode and iOS SDK.",
-      "Deploy apps to the App Store."
-    ],
-    outline: [
-      { title: "Introduction to Swift", content: "Learn the basics of Swift programming language." },
-      { title: "Building iOS Apps", content: "Master the iOS SDK to build beautiful apps." },
-      { title: "App Deployment", content: "Deploy your apps to the App Store and maintain them." }
-    ],
-    link: "https://matexdigital.com/enroll/iosdev"
-  },
-  androidDev: {
-    title: "Android Development",
-    tagline: "Develop and deploy powerful apps for Android devices.",
-    image: "https://via.placeholder.com/600x350?text=Android+Development",
-    description: [
-      "Learn Java and Kotlin for Android app development.",
-      "Build apps with Android Studio.",
-      "Publish apps to Google Play Store."
-    ],
-    outline: [
-      { title: "Introduction to Java & Kotlin", content: "Learn Java and Kotlin programming for Android." },
-      { title: "Building Android Apps", content: "Master Android Studio to build native apps." },
-      { title: "App Publishing", content: "Deploy your apps to Google Play and earn revenue." }
-    ],
-    link: "https://matexdigital.com/enroll/androiddev"
-  },
+ codingAnimationForKids: {
+  title: "Coding & Animation for Kids",
+  tagline: "Let your child explore the fun world of coding and animation!",
+  image: "images/coding.jpeg",
+  description: [
+    "This course introduces kids to the basics of coding and animation through interactive, block-based tools like Scratch and Blockly. Children will learn to create their own games, stories, and animations, developing logical thinking, creativity, and problem-solving skills. Perfect for young beginners eager to dive into technology in a playful way."
+  ],
+  outline: [
+    { 
+      title: "Introduction to Programming Concepts", 
+      content: "Understand the basics of coding, including sequences, loops, conditionals, and variables." 
+    },
+    { 
+      title: "Getting Started with Scratch and Blockly", 
+      content: "Learn how to use block-based programming tools to build simple projects." 
+    },
+    { 
+      title: "Creating Simple Animations", 
+      content: "Animate characters and backgrounds using movement and effects." 
+    },
+    { 
+      title: "Building Interactive Stories and Games", 
+      content: "Design engaging stories and games with user interaction." 
+    },
+    { 
+      title: "Adding Sound and Visual Effects", 
+      content: "Incorporate sounds and special effects to enhance projects." 
+    },
+    { 
+      title: "Debugging and Problem Solving", 
+      content: "Learn how to find and fix errors, and improve your projects." 
+    },
+    { 
+      title: "Project Planning and Execution", 
+      content: "Plan and build a final project using all learned skills." 
+    },
+    { 
+      title: "Sharing and Presenting Projects", 
+      content: "Share your creations with friends and family." 
+    },
+    { 
+      title: "Portfolio Building", 
+      content: "Collect your projects to showcase your progress and creativity." 
+    }
+  ],
+  link: "https://matexdigital.com/coding-animation-kids"
+},
   uxDesign: {
     title: "UI/UX Design",
     tagline: "Learn the principles of user interface and experience design.",
